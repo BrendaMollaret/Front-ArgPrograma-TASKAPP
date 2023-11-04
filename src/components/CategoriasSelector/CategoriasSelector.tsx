@@ -2,8 +2,9 @@
 
 const CategoriasSelector = () => {
   return (
-    <section className="container" id="selector-categorias">
-      <p className="fs-2">Seleccionar categoría</p>
+
+    <section className="container mt-3" id="selector-categorias">
+      <p className="fs-3"> Seleccione una categoría </p>
       <div className="row gap-4">
         <div className="col d-flex justify-content-center p-0">
           <a href="#porHacer"
