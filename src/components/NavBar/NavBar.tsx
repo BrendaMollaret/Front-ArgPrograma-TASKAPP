@@ -1,8 +1,25 @@
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Basket, Person } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+import ModalAgregarTarea from "../ModalAgregarTarea/ModalAgregarTarea";
+import { useState } from "react";
 
 const NavBar = () => {
+
+    const Navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+  
+    const handleShowModal = () => {
+      setShowModal(true);
+    };
+  
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+    
   return (
+
+    <>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">Desarrollo en Argentina</Navbar.Brand>
@@ -10,7 +27,7 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav className="me-auto">
-            <Nav.Link href="#home">Inicio</Nav.Link>
+          <Nav.Link onClick={() => Navigate('/')}> Inicio </Nav.Link>
 
             <NavDropdown title="Tareas" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Por hacer</NavDropdown.Item>
@@ -24,7 +41,7 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#agregar-tarea">Agregar tarea</Nav.Link>
+            <Nav.Link onClick={handleShowModal}>Agregar tarea</Nav.Link>
           </Nav>
 
         <Nav className="d-none d-md-flex ms-auto">
@@ -51,7 +68,13 @@ const NavBar = () => {
 
         </Navbar.Collapse>
       </Container>
+      
     </Navbar>
+    <ModalAgregarTarea showModal={showModal} handleClose={handleCloseModal} />
+    </>
+    
+    
+    
   );
 };
 
