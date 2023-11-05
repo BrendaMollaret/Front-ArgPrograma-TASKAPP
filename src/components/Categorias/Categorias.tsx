@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TaskService } from '../../services/TaskService';
-import CategoriasSelector from './CategoriasSelector'; // Importa el componente CategoriasSelector
-import CategoriasTareas from './CategoriasTareas'; // Importa el componente CategoriasTareas
+
 import { Task } from '../../types/Task';
+import CategoriasSelector from '../CategoriasSelector/CategoriasSelector';
+import CategoriasTareas from '../CategoriasTareas/CategoriasTareas';
 
 const Categorias = () => {
   const [tasks, setTasks] = useState<Task[]>([]);

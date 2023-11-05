@@ -8,11 +8,11 @@ import { Task } from '../../types/Task';
 type ModalAgregarTareaProps = {
   showModal: boolean;
   handleClose: () => void;
-  updateTasks: (newTask: Task) => Promise<{ data?: any; error?: string | undefined }>; // Modifica el tipo de retorno de updateTasks
-  onTaskAdded: (newTask: Task) => void; // Nueva propiedad para manejar la tarea agregada
+  createTask: (newTask: Task) => void;
+  onTaskAdded: (newTask: Task) => void;
 };
 
-const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handleClose, updateTasks, onTaskAdded }) => {
+const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handleClose, createTask }) => {
   
   const validationSchema = Yup.object({
     titulo: Yup.string().required('Este campo es obligatorio'),
@@ -38,22 +38,13 @@ const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handle
     onSubmit: async (values) => {
       values.estado = values.estado.toUpperCase(); // Convierte el estado a mayúsculas
       console.log('Datos del formulario:', values); // Agrega esta línea para verificar los datos del formulario
+      
       //updateTasks(values); // Llama a la función para agregar la nueva tarea
       values.estado = values.estado.toUpperCase();
-      try {
-        const result = await updateTasks(values);
-        if (result.data) {
-          console.log('Nueva tarea agregada:', result.data);
-          onTaskAdded(result.data); // Notifica al padre sobre la nueva tarea agregada
-          handleClose();
-        } else if (result.error) {
-          console.error('Error al agregar la tarea:', result.error);
-        }
-      } catch (error) {
-        console.error('Error desconocido:', error);
-      }
+      
+      // Llama a la función para agregar la nueva tarea
+      await createTask(values);
       handleClose(); // Cierra el modal después de enviar el formulario
-    
     },
   });
 

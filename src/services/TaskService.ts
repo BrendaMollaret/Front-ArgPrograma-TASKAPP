@@ -73,4 +73,19 @@ export const TaskService = {
     }
   },
 
+  createTask: async (task : Task):Promise<Task> => {
+
+    const response = await fetch(`${BASE_URL}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    });
+
+    const data = await response.json();
+    return data;
+    
+},
+
 };

@@ -16,6 +16,8 @@ const DetalleTarea = () => {
   const navigate = useNavigate(); //Redirigir al usuario a la pagina principal
 
   useEffect(() => {
+
+    //---------- OBTENER UNA TAREA ----------
     const fetchTask = async () => {
       try {
         if (taskId && !isNaN(parseInt(taskId, 10))) {
@@ -34,6 +36,9 @@ const DetalleTarea = () => {
 
     fetchTask();
   }, [taskId]);
+
+
+  //--------- CAMBIAR ESTADO A UNA TAREA --------
 
   const handleUpdateState = async () => {
     if (estado !== '') {
@@ -66,6 +71,7 @@ const DetalleTarea = () => {
 
 
   //----------- ELIMINAR UNA TAREA -------------
+  
   const handleDeleteTask = async () => {
     try {
       if (taskId) {
