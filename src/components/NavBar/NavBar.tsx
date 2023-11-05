@@ -5,6 +5,7 @@ import ModalAgregarTarea from "../ModalAgregarTarea/ModalAgregarTarea";
 import { useState } from "react";
 import { Task } from "../../types/Task";
 import { TaskService } from "../../services/TaskService";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
 
@@ -24,12 +25,26 @@ const NavBar = () => {
 
     
     //Agregar nueva tarea
-    const createTask = async (newTask: Task) => {
-     
-        const result = await TaskService.createTask(newTask);
-          console.log('Nueva tarea agregada:', result.id);
-          navigate(`/detalle/${result.id}`); //Ir al detalle de la tarea creada
-    };
+const createTask = async (newTask: Task) => {
+  try {
+    const result = await TaskService.createTask(newTask);
+    console.log('Nueva tarea agregada:', result.id);
+    navigate(`/detalle/${result.id}`); //Ir al detalle de la tarea creada
+
+    // Muestra una notificación de éxito utilizando react-toastify
+    toast.success('Tarea creada correctamente', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 2000, // Cerrar automáticamente después de 2 segundos
+    });
+  } catch (error) {
+    // Muestra una notificación de error si la creación de la tarea falla
+    toast.error('Error al crear la tarea', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 2000,
+    });
+    console.error('Error al crear la tarea:', error);
+  }
+};
 
     
   
