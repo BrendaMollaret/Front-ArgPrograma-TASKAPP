@@ -9,7 +9,6 @@ type ModalAgregarTareaProps = {
   showModal: boolean;
   handleClose: () => void;
   createTask: (newTask: Task) => void;
-  onTaskAdded: (newTask: Task) => void;
 };
 
 const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handleClose, createTask }) => {
@@ -80,23 +79,24 @@ const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handle
             </div>
 
         {/* ----- Descripción ----- */}
-        <div className="mb-3 mt-3">
-              <label htmlFor="descripcion" className="form-label"> Descripción </label>
-              <input
-              type="text"
+          <div className="mb-3 mt-3">
+            <label htmlFor="descripcion" className="form-label"> Descripción </label>
+            <textarea
               className="form-control"
               id="descripcion"
               name="descripcion"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.descripcion}
-              />
+              rows={3} // Número de filas
+              cols={50} // Número de columnas
+            />
 
-              {formik.touched.descripcion && formik.errors.descripcion ? (
-                <div className="text-danger"> {formik.errors.descripcion} </div>
-              ) : null} 
+            {formik.touched.descripcion && formik.errors.descripcion ? (
+              <div className="text-danger"> {formik.errors.descripcion} </div>
+            ) : null} 
+          </div>
 
-            </div>
 
         {/* ----- Tiempo ----- */}
         <div className="mb-3 mt-3">
