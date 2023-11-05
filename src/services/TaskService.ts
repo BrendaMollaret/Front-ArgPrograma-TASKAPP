@@ -6,7 +6,7 @@ export const TaskService = {
   
     // Obtener todas las tareas
     getAllTasks: async (): Promise<Task[]> => {
-        const response = await fetch(BASE_URL);
+        const response = await fetch(`${BASE_URL}`);
         const data = await response.json();
         return data;
     },
@@ -50,28 +50,6 @@ export const TaskService = {
         .catch(error => error);
     },
 
-    // Usamos POST para agregar una nueva tarea
-  addTask: async (task: Task): Promise<{ data?: Task; error?: string }> => {
-    try {
-      const response = await fetch(BASE_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return { data }; // Devuelve los datos de la nueva tarea
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al agregar la tarea');
-      }
-    } catch (error: any) {
-      return { error: error.message || 'Error desconocido' };
-    }
-  },
 
   createTask: async (task : Task):Promise<Task> => {
 

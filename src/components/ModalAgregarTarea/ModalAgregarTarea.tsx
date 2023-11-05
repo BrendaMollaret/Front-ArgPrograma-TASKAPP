@@ -36,9 +36,9 @@ const ModalAgregarTarea: React.FC<ModalAgregarTareaProps> = ({ showModal, handle
 
     onSubmit: async (values) => {
       values.estado = values.estado.toUpperCase(); // Convierte el estado a mayúsculas
-      console.log('Datos del formulario:', values); // Agrega esta línea para verificar los datos del formulario
-      
-      //updateTasks(values); // Llama a la función para agregar la nueva tarea
+      //console.log('Datos del formulario:', values); // Agrega esta línea para verificar los datos del formulario
+      console.log('Datos del formulario:', JSON.stringify(values));
+
       values.estado = values.estado.toUpperCase();
       
       // Llama a la función para agregar la nueva tarea
