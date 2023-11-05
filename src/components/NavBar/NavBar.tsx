@@ -3,11 +3,14 @@ import { Basket, Person } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import ModalAgregarTarea from "../ModalAgregarTarea/ModalAgregarTarea";
 import { useState } from "react";
+import { Task } from "../../types/Task";
+import { TaskService } from "../../services/TaskService";
 
 const NavBar = () => {
 
     const Navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [tasks, setTasks] = useState<Task[]>([]); // Inicializa el estado de las tareas
   
     const handleShowModal = () => {
       setShowModal(true);
@@ -16,7 +19,41 @@ const NavBar = () => {
     const handleCloseModal = () => {
       setShowModal(false);
     };
+
+    const handleTaskAdded = (newTask: Task) => {
+      setTasks([...tasks, newTask]); // Actualiza las tareas en el estado local
+    };    
+
     
+    const updateTasks = async (newTask: Task): Promise<{ data?: any; error?: string | undefined }> => {
+      try {
+        const result = await TaskService.addTask(newTask);
+        if (result.data) {
+          // Verificar que result.data no sea undefined antes de agregarlo a prevTasks
+          if (result.data instanceof Array) {
+            setTasks(prevTasks => [...prevTasks, ...result.data]);
+          } else {
+            setTasks(prevTasks => [...prevTasks, result.data]);
+          }
+        } else if (result.error) {
+          console.error('Error al agregar la tarea:', result.error);
+        }
+    
+        // Retorna el resultado de la operación para que coincida con el tipo esperado en ModalAgregarTareaProps
+        return result;
+      } catch (error) {
+        console.error('Error desconocido:', error);
+        // Retorna un objeto con la propiedad error en caso de error
+        return { error: 'Error desconocido' };
+      }
+    };
+    
+    
+    
+    
+    
+
+
   return (
 
     <>
@@ -70,7 +107,7 @@ const NavBar = () => {
       </Container>
       
     </Navbar>
-    <ModalAgregarTarea showModal={showModal} handleClose={handleCloseModal} />
+    <ModalAgregarTarea showModal={showModal} handleClose={handleCloseModal} updateTasks={updateTasks} onTaskAdded={handleTaskAdded} />
     </>
     
     

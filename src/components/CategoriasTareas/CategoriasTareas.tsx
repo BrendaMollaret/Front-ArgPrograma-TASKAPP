@@ -1,40 +1,50 @@
+import { Link } from "react-router-dom";
+import { Task } from "../../types/Task";
 
 
-const CategoriasTareas = () => {
+const CategoriasTareas = ({ tasks }: { tasks: Task[] }) => {
+  const categorias = ['PORHACER', 'ENPRODUCCION', 'PORTESTEAR', 'COMPLETADA'];
+
   return (
     <section className="container-fluid mt-5" id="categorias">
-
-      <section className="text-center mb-5" id="porHacer">
-        <h3 className="display-6">Por Hacer</h3>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center g-4" 
-        id="contenedor-porHacer">
-          {/* Contenido dinámico para Por Hacer */}
-        </div>
-      </section>
-
-      <section className="text-center mb-5" id="enProduccion">
-        <h3 className="display-6">En Producción</h3>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center g-4" 
-        id="contenedor-enProduccion">
-          {/* Contenido dinámico para En Producción */}
-        </div>
-      </section>
-
-      <section className="text-center mb-5" id="porTestear">
-        <h3 className="display-6">Por Testear</h3>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center g-4" 
-        id="contenedor-porTestear">
-          {/* Contenido dinámico para Por Testear */}
-        </div>
-      </section>
-
-      <section className="text-center mb-5" id="completada">
-        <h3 className="display-6">Completada</h3>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center g-4" 
-        id="contenedor-completada">
-          {/* Contenido dinámico para Completada */}
-        </div>
-      </section>
+      {categorias.map((categoria, index) => (
+        <section className="text-center mb-5" key={index}>
+          <h3 className="display-6">{categoria}</h3>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center g-4">
+            {tasks
+              .filter(task => task.estado === categoria.toUpperCase()) // Filtra las tareas por categoría
+              .map(task => (
+                <div className="col" key={task.id}>
+                  <div className="card h-100">
+                    <img
+                      style={{
+                        minHeight: '300px',
+                        maxHeight: '300px',
+                      }}
+                      className="card-img-top"
+                      src={task.imagen}
+                      alt={task.titulo}
+                    />
+                    <div className="card-body p-4">
+                      <div className="text-center">
+                        <h5 className="fw-bolder">{task.titulo}</h5>
+                        <span>{`Tiempo: ${task.tiempo}`}</span> <br />
+                        <span>{`Responsable: ${task.responsable}`}</span>
+                      </div>
+                    </div>
+                    <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div className="text-center d-flex gap-1 align-items-center justify-content-center">
+                      <Link to={`/detalle/${task.id}`} className="btn btn-outline-secondary mt-auto">
+                        Ver más
+                      </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </section>
+      ))}
     </section>
   );
 };

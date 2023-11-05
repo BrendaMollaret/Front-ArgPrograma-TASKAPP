@@ -9,7 +9,7 @@ const CarouselHome = () => {
       <img 
       className='d block w-100'
       style={{maxHeight: "500px", objectFit: 'cover'}}
-      src="public/assets/images/slide1.jpg" alt="slide1" />
+      src="/assets/images/slide1.jpg" alt="slide1" />
       <Carousel.Caption>
         <h3>Potencia tu negocio con nuestras soluciones personalizadas</h3>
         <p>
@@ -22,7 +22,7 @@ const CarouselHome = () => {
     <img 
       className='d block w-100'
       style={{maxHeight: "500px", objectFit: 'cover'}}
-      src="public/assets/images/slide2.jpg" alt="slide2" />
+      src="/assets/images/slide2.jpg" alt="slide2" />
       <Carousel.Caption>
         <h3> Los mejores expertos del país </h3>
         <p>
@@ -35,7 +35,7 @@ const CarouselHome = () => {
     <img 
       className='d block w-100'
       style={{maxHeight: "500px", objectFit: 'cover'}}
-      src="public/assets/images/slide3.jpg" alt="slide3" />
+      src="/assets/images/slide3.jpg" alt="slide3" />
       
       <Carousel.Caption>
         <h3> Somos el mejor equipo de Aplicaciones Agiles </h3>
