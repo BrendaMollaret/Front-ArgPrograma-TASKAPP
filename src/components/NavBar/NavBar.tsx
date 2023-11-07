@@ -9,11 +9,9 @@ import { toast } from "react-toastify";
 
 const NavBar = () => {
 
-    const Navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
-   // const [tasks, setTasks] = useState<Task[]>([]); // Inicializa el estado de las tareas
-    
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+      
     
     const handleShowModal = () => {
       setShowModal(true);
@@ -59,7 +57,7 @@ const createTask = async (newTask: Task) => {
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav className="me-auto">
-          <Nav.Link onClick={() => Navigate('/')}> Inicio </Nav.Link>
+          <Nav.Link onClick={() => navigate('/')}> Inicio </Nav.Link>
 
             <NavDropdown title="Tareas" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => navigate('/PORHACER')}>Por hacer</NavDropdown.Item>

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from 'react-router-dom'; //Redirigir al usuario a la pagina principal
+import { Button } from 'react-bootstrap';
 
 const DetalleTarea = () => {
   const { taskId } = useParams<{ taskId?: string }>();
@@ -96,6 +97,8 @@ const DetalleTarea = () => {
     }
   };
 
+
+
   return (
     <div className="container mt-5">
       {task && (
@@ -139,9 +142,11 @@ const DetalleTarea = () => {
                 <h5 className="card-title">{relatedTask.titulo}</h5>
                 <p className="card-text">Tiempo: {relatedTask.tiempo}</p>
                 <p className="card-text">Responsable: {relatedTask.responsable}</p>
-                <a href={`/detalle.html?id=${relatedTask.id}`} className="btn btn-primary">
+                
+                <Button variant="primary" onClick={() => navigate(`/detalle/${relatedTask.id}`)}>
                   Ver más
-                </a>
+                </Button>
+
               </div>
             </div>
           </div>
