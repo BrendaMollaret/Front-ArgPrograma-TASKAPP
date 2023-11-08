@@ -1,6 +1,8 @@
 # Front-ArgPrograma-TASKAPP
 
-## Pasos para ejecutar
+## Live on vercel! 👉 https://front-taskapp-argprograma-react.vercel.app/ 👈
+
+### Pasos para ejecutar
 
 - Primero debe estar corriendo el back: https://github.com/BrendaMollaret/Back-ArgPrograma-TASKAPP
   
@@ -15,3 +17,5 @@
     - npm i react-icons
       
 - Tercero ejecutamos **npm run dev** para dirigirnos a la aplicación
+
+Nota: Si queres usar el back de manera local ejecutando el json-server, en TaskService.ts debés cambiar la base_url por https://localhost:3000
