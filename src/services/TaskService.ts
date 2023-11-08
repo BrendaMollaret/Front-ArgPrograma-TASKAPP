@@ -1,6 +1,6 @@
 import { Task } from '../types/Task';
 
-const BASE_URL = 'https://back-arg-programa-taskapp.vercel.app/tasks';
+const BASE_URL = 'https://back-taskapp.onrender.com/tasks';
 
 export const TaskService = {
   
